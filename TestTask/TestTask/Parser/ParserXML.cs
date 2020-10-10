@@ -14,10 +14,14 @@ namespace TestTask
             NameOfElement = CurrentName;
             Attributes = null;
             Childs = null;
+            HeightAtPixel = 0;
+            WidthAtPixel = 20;
         }
         public XName NameOfElement;
         public IEnumerable<XAttribute> Attributes;
         public List<ElementXMLInTree> Childs;
+        public float HeightAtPixel;
+        public float WidthAtPixel;
     }
     class ParserXML: IParserable 
     {
@@ -33,12 +37,6 @@ namespace TestTask
             if (ParsedXml.HasElements == true)
             {
                 Root.Childs = new List<ElementXMLInTree>();
-                int CountCurrentElement = 0;
-                foreach(XElement currentElement in ParsedXml.DescendantsAndSelf())
-                {
-                    CountCurrentElement++;
-                }
-                Root.CountAllDescendants = CountCurrentElement - 1;//Минус первый элемент
                 NextSearchChildsForParent(Root, ParsedXml);
             }
             return Root;

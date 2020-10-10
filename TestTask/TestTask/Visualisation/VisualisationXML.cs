@@ -8,50 +8,52 @@ namespace TestTask
 {
     class VisualisationXML: IVisualizable
     {
-        private int MaxSizeOfWidthAtPixels = 0;
+        private int width = 324;//12 размер 1 буквы
+        private int height = 40;
+        //private int x = 0;
+        private int y = 0;
+        private Graphics g;
         public Bitmap Visualisation(ElementXMLInTree ElementForVisualisation, Bitmap bmp)
         {
-            int x = 0;
-            int y = 0;
-            
-            Bitmap b2 = new Bitmap(bmp, new Size(1000, 1000));
-            using (Graphics g = Graphics.FromImage(b2))
+            Bitmap b2 = new Bitmap(bmp, new Size(5500, 5000));
+            using (g = Graphics.FromImage(b2))
             {
 
                 g.TranslateTransform(10, 10);
-                Image Element = Properties.Resources.Element;
+                
                 Image ElementWithAttribute = Properties.Resources.ElementWithAttribute;
+                width = ElementForVisualisation.NameOfElement.ToString().Length * 12;
+                foreach (ElementXMLInTree element in ElementForVisualisation.Childs)
+                    DrawElementOfTree(ElementForVisualisation, element, width + 50);
 
 
 
-                int width = 80;
-                int height = 80;
-                for(int i=0;i<100;i++)
-                {
-                    g.DrawImage(Element, x, y, width, height);
-                    PointF pos = new PointF(x+10, y);
-                    FindDepthTree(ElementForVisualisation, 1);
-                    g.DrawString(MaxSizeOfWidthAtPixels.ToString(), new Font("Arial", height*1/4), Brushes.Black, pos);
-                    x += 100;
-                }
-                g.DrawImage(Element, x, y, width, height);
+
+
+                //g.DrawString("Sвапываыварываываымсвывавап", new Font("Times New Roman", height*1/3), Brushes.Black, pos);
+
             }
             return b2;
         }
-        private void FindDepthTree(ElementXMLInTree ElementTree, int count)
+        private void DrawElementOfTree(ElementXMLInTree ElementTreeParent,ElementXMLInTree ElementTreeChild,int x)
         {
-            if (count > MaxSizeOfWidthAtPixels)
-                MaxSizeOfWidthAtPixels = count;
-            if (ElementTree.Childs != null)
+            width = ElementTreeChild.NameOfElement.ToString().Length * 12;
+            PointF pos = new PointF(x + width / 8.5f, y + height / 4);
+            g.DrawString(ElementTreeChild.NameOfElement.ToString(), new Font("Times New Roman", height * 1 / 3), Brushes.Black, pos);
+            g.DrawImage(Properties.Resources.Element, x, y, width, height);
+            if (ElementTreeChild.Childs != null)
             {
-                List<ElementXMLInTree> CurrentChildsOfElement = ElementTree.Childs;
-                foreach (ElementXMLInTree CurrentElement in CurrentChildsOfElement)
+                x += width + 50;
+                foreach (ElementXMLInTree element in ElementTreeChild.Childs)
                 {
-                    FindDepthTree(CurrentElement, count + 1);
+                    DrawElementOfTree(ElementTreeChild, element,x);
+                    //if(ElementTreeChild.Childs.Count != 1)
+                        y += height+10;
                 }
             }
-            
         }
+
         //https://raw.githubusercontent.com/kizeevov/elcomplusfiles/main/config.xml
+        //https://raw.githubusercontent.com/kizeevov/elcomplusfiles/main/tree.xml
     }
 }
