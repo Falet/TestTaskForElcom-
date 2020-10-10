@@ -4,8 +4,10 @@ using System.Xml.Linq;
 
 namespace TestTask
 {
-    public struct ElementXMLInTree
-    //Односвязный список элементов дерева,листьями которого являются элементы XML
+    /// <summary>
+    /// Односвязный список элементов дерева,листьями которого являются элементы XML
+    /// </summary>
+    class ElementXMLInTree
     {
         public ElementXMLInTree(XName CurrentName)
         {
@@ -17,11 +19,13 @@ namespace TestTask
         public IEnumerable<XAttribute> Attributes;
         public List<ElementXMLInTree> Childs;
     }
-    class ParserXML: IParserable
+    class ParserXML: IParserable 
     {
-        
-        public void Parse(XElement ParsedXml)
-        //Основаная функция для парсинга XML
+        /// <summary>
+        /// Основаная функция для парсинга XML
+        /// </summary>
+        /// <param name="ParsedXml">Общий массив элементов XML</param>
+        public ElementXMLInTree Parse(XElement ParsedXml)
         {
             ElementXMLInTree Root = new ElementXMLInTree(ParsedXml.Name);
             if (ParsedXml.HasAttributes == true)
@@ -29,12 +33,22 @@ namespace TestTask
             if (ParsedXml.HasElements == true)
             {
                 Root.Childs = new List<ElementXMLInTree>();
+                int CountCurrentElement = 0;
+                foreach(XElement currentElement in ParsedXml.DescendantsAndSelf())
+                {
+                    CountCurrentElement++;
+                }
+                Root.CountAllDescendants = CountCurrentElement - 1;//Минус первый элемент
                 NextSearchChildsForParent(Root, ParsedXml);
             }
-                
+            return Root;
         }
+        /// <summary>
+        /// Рекурсивная функция для создания ссылок на дочерние элементы в односвязном списке
+        /// </summary>
+        /// <param name="Parent">Родитель текущей структуры</param>
+        /// <param name="Childs">Дочерние элементы текущей структуры</param>
         private void NextSearchChildsForParent(ElementXMLInTree Parent, XElement Childs)
-        //Рекурсивная функция для создания ссылок на дочерние элементы в односвязном списке
         {
             IEnumerable<XElement> ElementsXML = Childs.Elements();
             foreach (XElement currentElement in ElementsXML)
@@ -42,7 +56,7 @@ namespace TestTask
                 ElementXMLInTree currentElementForTree = new ElementXMLInTree(currentElement.Name);
                 Parent.Childs.Add(currentElementForTree);
                 if(currentElement.HasAttributes == true)
-                    Parent.Attributes = currentElement.Attributes();
+                    currentElementForTree.Attributes = currentElement.Attributes();
                 if (currentElement.HasElements == true)
                 {
                     currentElementForTree.Childs = new List<ElementXMLInTree>();

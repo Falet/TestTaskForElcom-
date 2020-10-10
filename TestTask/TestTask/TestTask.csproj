@@ -86,8 +86,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\Hearthstone Screenshot 08-13-20 23.43.53.png" />
+    <None Include="Resources\Element.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ElementWithAttribute.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

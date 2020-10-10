@@ -63,9 +63,9 @@ namespace TestTask.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Hearthstone_Screenshot_08_13_20_23_43_53 {
+        internal static System.Drawing.Bitmap Element {
             get {
-                object obj = ResourceManager.GetObject("Hearthstone Screenshot 08-13-20 23.43.53", resourceCulture);
+                object obj = ResourceManager.GetObject("Element", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace TestTask.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Hearthstone_Screenshot_08_13_20_23_431 {
+        internal static System.Drawing.Bitmap ElementWithAttribute {
             get {
-                object obj = ResourceManager.GetObject("Hearthstone Screenshot 08-13-20 23.431", resourceCulture);
+                object obj = ResourceManager.GetObject("ElementWithAttribute", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

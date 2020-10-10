@@ -4,8 +4,9 @@ using System.Xml.Linq;
 
 namespace TestTask
 {
+    //Интерфейс на случай парсинга разных форматов(Json...)
     interface IParserable
     {
-        void Parse(XElement ParsedData);
+        ElementXMLInTree Parse(XElement ParsedData);
     }
 }
