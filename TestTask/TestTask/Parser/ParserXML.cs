@@ -18,7 +18,7 @@ namespace TestTask
             WidthAtPixel = 20;
         }
         public XName NameOfElement;
-        public IEnumerable<XAttribute> Attributes;
+        public List<string> Attributes;
         public List<ElementXMLInTree> Childs;
         public float HeightAtPixel;
         public float WidthAtPixel;
@@ -33,7 +33,13 @@ namespace TestTask
         {
             ElementXMLInTree Root = new ElementXMLInTree(ParsedXml.Name);
             if (ParsedXml.HasAttributes == true)
-                Root.Attributes = ParsedXml.Attributes();
+            {
+                Root.Attributes = new List<string>();
+                foreach (XAttribute element in ParsedXml.Attributes())
+                {
+                    Root.Attributes.Add(element.Name.ToString());
+                }
+            }
             if (ParsedXml.HasElements == true)
             {
                 Root.Childs = new List<ElementXMLInTree>();
@@ -54,7 +60,13 @@ namespace TestTask
                 ElementXMLInTree currentElementForTree = new ElementXMLInTree(currentElement.Name);
                 Parent.Childs.Add(currentElementForTree);
                 if(currentElement.HasAttributes == true)
-                    currentElementForTree.Attributes = currentElement.Attributes();
+                {
+                    currentElementForTree.Attributes = new List<string>();
+                    foreach (XAttribute element in currentElement.Attributes())
+                    {
+                        currentElementForTree.Attributes.Add(element.Name.ToString());
+                    }
+                }
                 if (currentElement.HasElements == true)
                 {
                     currentElementForTree.Childs = new List<ElementXMLInTree>();

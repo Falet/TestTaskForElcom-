@@ -8,9 +8,7 @@ namespace TestTask
 {
     class VisualisationXML: IVisualizable
     {
-        private int width = 324;//12 размер 1 буквы
-        private int height = 40;
-        //private int x = 0;
+        private float Gheight = 40;
         private int y = 0;
         private Graphics g;
         public Bitmap Visualisation(ElementXMLInTree ElementForVisualisation, Bitmap bmp)
@@ -22,33 +20,73 @@ namespace TestTask
                 g.TranslateTransform(10, 10);
                 
                 Image ElementWithAttribute = Properties.Resources.ElementWithAttribute;
-                width = ElementForVisualisation.NameOfElement.ToString().Length * 12;
-                foreach (ElementXMLInTree element in ElementForVisualisation.Childs)
-                    DrawElementOfTree(ElementForVisualisation, element, width + 50);
+                float width = 0;
+                int height = 40;
+                width = ElementForVisualisation.NameOfElement.ToString().Length * height * 1 / 3.5f;
+                PointF pos = new PointF(0 + width / 15, y + height / 4);
+                g.DrawString(ElementForVisualisation.NameOfElement.ToString(), new Font("Times New Roman", height * 1 / 3), Brushes.Black, pos);
+                g.DrawImage(Properties.Resources.Element, 0, y, width, height);
+                int y1 = y;
+                if (ElementForVisualisation.Childs != null)
+                {
+                    foreach (ElementXMLInTree element in ElementForVisualisation.Childs)
+                    {
+                        Point pt1, pt2;
 
-
-
-
-
-                //g.DrawString("Sвапываыварываываымсвывавап", new Font("Times New Roman", height*1/3), Brushes.Black, pos);
-
+                        pt1 = new Point(0, y1); pt1.Offset((int)width, height / 2);
+                        pt2 = new Point((int)(0 + width + 150), y); pt2.Offset(0, height / 2);
+                        using (Pen pen = new Pen(Color.Blue, 2))
+                        {
+                            g.DrawLine(pen, pt1, pt2);
+                        }
+                        DrawElementOfTree(element, width + 150);
+                        if (element != ElementForVisualisation.Childs[ElementForVisualisation.Childs.Count - 1])
+                            y += height + 10;
+                    }
+                }
             }
             return b2;
         }
-        private void DrawElementOfTree(ElementXMLInTree ElementTreeParent,ElementXMLInTree ElementTreeChild,int x)
+        private void DrawElementOfTree(ElementXMLInTree ElementTreeChild,float x)
         {
-            width = ElementTreeChild.NameOfElement.ToString().Length * 12;
-            PointF pos = new PointF(x + width / 8.5f, y + height / 4);
-            g.DrawString(ElementTreeChild.NameOfElement.ToString(), new Font("Times New Roman", height * 1 / 3), Brushes.Black, pos);
-            g.DrawImage(Properties.Resources.Element, x, y, width, height);
+            float heightA;
+            float widthA= 0;
+            Image ElementImage;
+            if (ElementTreeChild.Attributes != null)
+            {
+                heightA = ElementTreeChild.Attributes.Count * Gheight * 1 / 3.5f;
+                foreach (string element in ElementTreeChild.Attributes)
+                {
+                    float widthAB = element.Length * Gheight * 1 / 3.5f;
+                    if (widthAB > widthA)
+                        widthA = widthAB;
+                }
+                ElementImage = Properties.Resources.ElementWithAttribute;
+            }
+            else
+                ElementImage = Properties.Resources.Element;
+            float width = Math.Max(ElementTreeChild.NameOfElement.ToString().Length * Gheight * 1 / 3.5f, widthA);
+            PointF pos = new PointF(x + width / 15, y + Gheight / 4);
+            g.DrawString(ElementTreeChild.NameOfElement.ToString(), new Font("Times New Roman", Gheight * 1 / 3), Brushes.Black, pos);
+            g.DrawImage(ElementImage, x, y, width, Gheight);
+            
             if (ElementTreeChild.Childs != null)
             {
-                x += width + 50;
+                x += width + 150;
+                int y1 = y;
                 foreach (ElementXMLInTree element in ElementTreeChild.Childs)
                 {
-                    DrawElementOfTree(ElementTreeChild, element,x);
-                    //if(ElementTreeChild.Childs.Count != 1)
-                        y += height+10;
+                    Point pt1, pt2;
+                    
+                    pt1 = new Point((int)(x- width - 150), y1); pt1.Offset((int)width, (int)Gheight / 2);
+                    pt2 = new Point((int)x, y); pt2.Offset(0, (int)Gheight / 2);
+                    using (Pen pen = new Pen(Color.Blue, 2))
+                    {
+                        g.DrawLine(pen, pt1, pt2);
+                    }
+                    DrawElementOfTree(element,x);
+                    if(element != ElementTreeChild.Childs[ElementTreeChild.Childs.Count - 1])
+                        y += (int)Gheight +10;
                 }
             }
         }
