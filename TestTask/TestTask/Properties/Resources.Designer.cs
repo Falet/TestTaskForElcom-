@@ -73,16 +73,6 @@ namespace TestTask.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ElementWithAttribute {
-            get {
-                object obj = ResourceManager.GetObject("ElementWithAttribute", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ElementWithAttributeLower {
             get {
                 object obj = ResourceManager.GetObject("ElementWithAttributeLower", resourceCulture);

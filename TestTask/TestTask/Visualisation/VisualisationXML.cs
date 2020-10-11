@@ -25,7 +25,6 @@ namespace TestTask
             Canvas = new Bitmap(1, 1);
             using (GraphicForDraw = Graphics.FromImage(Canvas))
             {
-                Image ElementWithAttribute = Properties.Resources.ElementWithAttribute;
                 float WidthOfElement = ElementForVisualisation.NameOfElement.ToString().Length * SetHeightOfElement * 1 / 3.5f;
                 PointF PosForText = new PointF(0 + WidthOfElement / 15, GlobalPosY + SetHeightOfElement / 4);
                 if((0 + WidthOfElement + 150) > Canvas.Width || (0 + SetHeightOfElement) > Canvas.Height)
