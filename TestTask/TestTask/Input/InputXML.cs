@@ -10,11 +10,11 @@ namespace TestTask
         {
             try
             {
-                XmlReader r = XmlReader.Create(URLString);
-                while (r.NodeType != XmlNodeType.Element)
-                    r.Read();
-                XElement e = XElement.Load(r);
-                return e;
+                XmlReader XMLOnURL = XmlReader.Create(URLString);
+                while (XMLOnURL.NodeType != XmlNodeType.Element)
+                    XMLOnURL.Read();
+                XElement ResultXML = XElement.Load(XMLOnURL);
+                return ResultXML;
             }
             catch
             {

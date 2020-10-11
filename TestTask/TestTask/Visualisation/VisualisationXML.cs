@@ -9,7 +9,6 @@ namespace TestTask
     class VisualisationXML: IVisualizable
     {
         private float GlobalPosY = 0;
-
         private Graphics GraphicForDraw;
         private Bitmap Canvas;
         private SizeF SizeOfNewImage;
