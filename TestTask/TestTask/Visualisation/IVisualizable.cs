@@ -8,6 +8,6 @@ namespace TestTask
     //Интерфейс на случай другого метода визуализации
     interface IVisualizable
     {
-        Bitmap Visualisation(ElementXMLInTree ElementForVisualisation, Bitmap bmp);
+        Bitmap Visualisation(ElementXMLInTree ElementForVisualisation, float SetHeightOfElement);
     }
 }

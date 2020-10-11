@@ -14,14 +14,10 @@ namespace TestTask
             NameOfElement = CurrentName;
             Attributes = null;
             Childs = null;
-            HeightAtPixel = 0;
-            WidthAtPixel = 20;
         }
         public XName NameOfElement;
         public List<XAttribute> Attributes;
         public List<ElementXMLInTree> Childs;
-        public float HeightAtPixel;
-        public float WidthAtPixel;
     }
     class ParserXML: IParserable 
     {

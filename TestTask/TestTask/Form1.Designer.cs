@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ButtonEnter = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.InfoText = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,15 +49,23 @@
             this.panel1.Size = new System.Drawing.Size(747, 367);
             this.panel1.TabIndex = 3;
             // 
-            // button1
+            // pictureBox1
             // 
-            this.button1.Location = new System.Drawing.Point(700, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 21);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Enter";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pictureBox1.Location = new System.Drawing.Point(-3, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(750, 367);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // ButtonEnter
+            // 
+            this.ButtonEnter.Location = new System.Drawing.Point(700, 27);
+            this.ButtonEnter.Name = "ButtonEnter";
+            this.ButtonEnter.Size = new System.Drawing.Size(75, 21);
+            this.ButtonEnter.TabIndex = 4;
+            this.ButtonEnter.Text = "Enter";
+            this.ButtonEnter.UseVisualStyleBackColor = true;
+            this.ButtonEnter.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
@@ -67,22 +75,14 @@
             this.textBox1.TabIndex = 5;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // label1
+            // InfoText
             // 
             this.InfoText.AutoSize = true;
             this.InfoText.Location = new System.Drawing.Point(25, 11);
-            this.InfoText.Name = "label1";
+            this.InfoText.Name = "InfoText";
             this.InfoText.Size = new System.Drawing.Size(0, 13);
             this.InfoText.TabIndex = 6;
             this.InfoText.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(-3, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(750, 367);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -91,7 +91,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.InfoText);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ButtonEnter);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Form1";
@@ -107,7 +107,7 @@
         #endregion
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ButtonEnter;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label InfoText;
     }
