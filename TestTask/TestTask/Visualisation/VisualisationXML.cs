@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Drawing;
-using System.IO;
 
 namespace TestTask
 {
