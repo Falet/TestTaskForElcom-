@@ -87,14 +87,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ElementWithAttributeLower.png" />
-    <None Include="Resources\ElementWithAttributeUpper.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Element.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\ElementWithAttribute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\ElementWithAttributeUpper.png" />
+    <Content Include="Resources\Element.png" />
+    <Resource Include="Resources\ElementWithAttributeLower.png" />
+    <Resource Include="Resources\ElementWithAttributeUpper.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

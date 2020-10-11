@@ -18,7 +18,7 @@ namespace TestTask
             WidthAtPixel = 20;
         }
         public XName NameOfElement;
-        public List<string> Attributes;
+        public List<XAttribute> Attributes;
         public List<ElementXMLInTree> Childs;
         public float HeightAtPixel;
         public float WidthAtPixel;
@@ -34,10 +34,10 @@ namespace TestTask
             ElementXMLInTree Root = new ElementXMLInTree(ParsedXml.Name);
             if (ParsedXml.HasAttributes == true)
             {
-                Root.Attributes = new List<string>();
+                Root.Attributes = new List<XAttribute>();
                 foreach (XAttribute element in ParsedXml.Attributes())
                 {
-                    Root.Attributes.Add(element.Name.ToString());
+                    Root.Attributes.Add(element);
                 }
             }
             if (ParsedXml.HasElements == true)
@@ -61,10 +61,10 @@ namespace TestTask
                 Parent.Childs.Add(currentElementForTree);
                 if(currentElement.HasAttributes == true)
                 {
-                    currentElementForTree.Attributes = new List<string>();
+                    currentElementForTree.Attributes = new List<XAttribute>();
                     foreach (XAttribute element in currentElement.Attributes())
                     {
-                        currentElementForTree.Attributes.Add(element.Name.ToString());
+                        currentElementForTree.Attributes.Add(element);
                     }
                 }
                 if (currentElement.HasElements == true)

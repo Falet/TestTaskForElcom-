@@ -79,5 +79,25 @@ namespace TestTask.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ElementWithAttributeLower {
+            get {
+                object obj = ResourceManager.GetObject("ElementWithAttributeLower", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ElementWithAttributeUpper {
+            get {
+                object obj = ResourceManager.GetObject("ElementWithAttributeUpper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

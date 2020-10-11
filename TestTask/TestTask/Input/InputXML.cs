@@ -16,7 +16,7 @@ namespace TestTask
                 XElement e = XElement.Load(r);
                 return e;
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }

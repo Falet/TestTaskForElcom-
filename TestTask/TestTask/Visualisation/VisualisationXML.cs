@@ -8,90 +8,99 @@ namespace TestTask
 {
     class VisualisationXML: IVisualizable
     {
-        private float Gheight = 40;
-        private int y = 0;
+        private float GLobalHeightElement = 38;
+        private float GlobalPosY = 0;
         private Graphics g;
         public Bitmap Visualisation(ElementXMLInTree ElementForVisualisation, Bitmap bmp)
         {
-            Bitmap b2 = new Bitmap(bmp, new Size(5500, 5000));
-            using (g = Graphics.FromImage(b2))
+            Bitmap ResizedBitMap = new Bitmap(bmp, new Size(1500, 1000));
+            using (g = Graphics.FromImage(ResizedBitMap))
             {
-
                 g.TranslateTransform(10, 10);
                 
                 Image ElementWithAttribute = Properties.Resources.ElementWithAttribute;
-                float width = 0;
-                int height = 40;
-                width = ElementForVisualisation.NameOfElement.ToString().Length * height * 1 / 3.5f;
-                PointF pos = new PointF(0 + width / 15, y + height / 4);
-                g.DrawString(ElementForVisualisation.NameOfElement.ToString(), new Font("Times New Roman", height * 1 / 3), Brushes.Black, pos);
-                g.DrawImage(Properties.Resources.Element, 0, y, width, height);
-                int y1 = y;
+                float Width = ElementForVisualisation.NameOfElement.ToString().Length * GLobalHeightElement * 1 / 3.5f;
+                PointF PosForText = new PointF(0 + Width / 15, GlobalPosY + GLobalHeightElement / 4);
+                g.DrawString(ElementForVisualisation.NameOfElement.ToString(), new Font("Times New Roman", GLobalHeightElement * 1 / 3), Brushes.Black, PosForText);
+                g.DrawImage(Properties.Resources.Element, 0, GlobalPosY, Width, GLobalHeightElement);
+                float SavedYPosForDrawLine = GlobalPosY;
                 if (ElementForVisualisation.Childs != null)
                 {
                     foreach (ElementXMLInTree element in ElementForVisualisation.Childs)
                     {
-                        Point pt1, pt2;
-
-                        pt1 = new Point(0, y1); pt1.Offset((int)width, height / 2);
-                        pt2 = new Point((int)(0 + width + 150), y); pt2.Offset(0, height / 2);
-                        using (Pen pen = new Pen(Color.Blue, 2))
-                        {
-                            g.DrawLine(pen, pt1, pt2);
-                        }
-                        DrawElementOfTree(element, width + 150);
+                        DrawLineBetweenElement(Width, Width+ 150, SavedYPosForDrawLine);
+                        DrawElementOfTree(element, Width + 150);
                         if (element != ElementForVisualisation.Childs[ElementForVisualisation.Childs.Count - 1])
-                            y += height + 10;
+                            GlobalPosY += GLobalHeightElement + 10;
                     }
                 }
             }
-            return b2;
+            return ResizedBitMap;
         }
-        private void DrawElementOfTree(ElementXMLInTree ElementTreeChild,float x)
+        private void DrawElementOfTree(ElementXMLInTree ElementTreeForDraw,float x)
         {
             float heightA;
-            float widthA= 0;
-            Image ElementImage;
-            if (ElementTreeChild.Attributes != null)
+            float WidthElementOfAttribute = 0;
+            float width;
+            float SavedYPosForDrawLine = GlobalPosY;
+            if (ElementTreeForDraw.Attributes != null)
             {
-                heightA = ElementTreeChild.Attributes.Count * Gheight * 1 / 3.5f;
-                foreach (string element in ElementTreeChild.Attributes)
+                heightA = ElementTreeForDraw.Attributes.Count * GLobalHeightElement * 1.2f;
+
+                foreach (XAttribute element in ElementTreeForDraw.Attributes)
                 {
-                    float widthAB = element.Length * Gheight * 1 / 3.5f;
-                    if (widthAB > widthA)
-                        widthA = widthAB;
+                    float widthAB = element.ToString().Length * GLobalHeightElement * 1 / 3;
+                    if (widthAB > WidthElementOfAttribute)
+                        WidthElementOfAttribute = widthAB;
                 }
-                ElementImage = Properties.Resources.ElementWithAttribute;
+                width = Math.Max(ElementTreeForDraw.NameOfElement.ToString().Length * GLobalHeightElement * 1 / 3.5f, WidthElementOfAttribute);
+                g.DrawImage(Properties.Resources.ElementWithAttributeUpper, x, GlobalPosY, width, GLobalHeightElement);
+                g.DrawImage(Properties.Resources.ElementWithAttributeLower, x, GlobalPosY + GLobalHeightElement, width, heightA);
+                
+                PointF PosForText = new PointF(x + width / 10, GlobalPosY + GLobalHeightElement / 4);
+                g.DrawString(ElementTreeForDraw.NameOfElement.ToString(), new Font("Times New Roman", GLobalHeightElement * 1 / 3), Brushes.Black, PosForText);
+                foreach (XAttribute element in ElementTreeForDraw.Attributes)
+                {
+                    PosForText.Y += GLobalHeightElement;
+                    g.DrawString(element.ToString(), new Font("Times New Roman", GLobalHeightElement * 1 / 3), Brushes.Black, PosForText);
+                }
+                SavedYPosForDrawLine = GlobalPosY;
+                GlobalPosY += heightA;
             }
             else
-                ElementImage = Properties.Resources.Element;
-            float width = Math.Max(ElementTreeChild.NameOfElement.ToString().Length * Gheight * 1 / 3.5f, widthA);
-            //g.DrawImage(Properties.Resources.ElementWithAttributeUpper, x, y, width, Gheight);
-            PointF pos = new PointF(x + width / 15, y + Gheight / 4);
-            g.DrawString(ElementTreeChild.NameOfElement.ToString(), new Font("Times New Roman", Gheight * 1 / 3), Brushes.Black, pos);
-            g.DrawImage(ElementImage, x, y, width, Gheight);
-            
-            if (ElementTreeChild.Childs != null)
+            {
+                width = ElementTreeForDraw.NameOfElement.ToString().Length * GLobalHeightElement * 1 / 3.5f;
+                g.DrawImage(Properties.Resources.Element, x, GlobalPosY, width, GLobalHeightElement);
+                PointF pos = new PointF(x + width / 15, GlobalPosY + GLobalHeightElement / 4);
+                g.DrawString(ElementTreeForDraw.NameOfElement.ToString(), new Font("Times New Roman", GLobalHeightElement * 1 / 3), Brushes.Black, pos);
+            }
+            if (ElementTreeForDraw.Childs != null)
             {
                 x += width + 150;
-                int y1 = y;
-                foreach (ElementXMLInTree element in ElementTreeChild.Childs)
+                
+                foreach (ElementXMLInTree element in ElementTreeForDraw.Childs)
                 {
-                    Point pt1, pt2;
-                    
-                    pt1 = new Point((int)(x- width - 150), y1); pt1.Offset((int)width, (int)Gheight / 2);
-                    pt2 = new Point((int)x, y); pt2.Offset(0, (int)Gheight / 2);
-                    using (Pen pen = new Pen(Color.Blue, 2))
-                    {
-                        g.DrawLine(pen, pt1, pt2);
-                    }
+                    DrawLineBetweenElement(width,x, SavedYPosForDrawLine);
                     DrawElementOfTree(element,x);
-                    if(element != ElementTreeChild.Childs[ElementTreeChild.Childs.Count - 1])
-                        y += (int)Gheight +10;
+                    if(element != ElementTreeForDraw.Childs[ElementTreeForDraw.Childs.Count - 1])
+                        GlobalPosY += (int)GLobalHeightElement +10;
                 }
             }
         }
+        private void DrawLineBetweenElement(float CurrentWidth, float XPos, float YPos)
+        {
+            PointF pt1, pt2;
 
+            pt1 = new PointF(XPos - CurrentWidth - 150, YPos);
+            pt1.X += CurrentWidth;
+            pt1.Y += GLobalHeightElement / 2;
+            pt2 = new PointF(XPos, GlobalPosY);
+            pt2.Y += GLobalHeightElement / 2;
+            using (Pen pen = new Pen(Color.Blue, 2))
+            {
+                g.DrawLine(pen, pt1, pt2);
+            }
+        }
         //https://raw.githubusercontent.com/kizeevov/elcomplusfiles/main/config.xml
         //https://raw.githubusercontent.com/kizeevov/elcomplusfiles/main/tree.xml
     }
