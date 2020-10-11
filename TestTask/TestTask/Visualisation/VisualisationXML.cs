@@ -169,7 +169,7 @@ namespace TestTask
         /// <param name="ImgToResize">Холст для изменения размера</param>
         /// <param name="Size">Требуемый размер</param>
         /// <returns></returns>
-        public static Bitmap ResizeImage(Bitmap ImgToResize, SizeF Size)
+        private static Bitmap ResizeImage(Bitmap ImgToResize, SizeF Size)
         {
             try
             {
