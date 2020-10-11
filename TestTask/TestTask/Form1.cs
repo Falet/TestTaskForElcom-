@@ -29,8 +29,8 @@ namespace TestTask
                 IParserable ParseXML = new ParserXML();
                 IVisualizable VisualisationXML = new VisualisationXML();
                 Bitmap Canvas = VisualisationXML.Visualisation(ParseXML.Parse(ReceivedListElemets), 38);
-                pictureBox1.Size = Canvas.Size;
-                pictureBox1.Image = Canvas;
+                PictureBoxTree.Size = Canvas.Size;
+                PictureBoxTree.Image = Canvas;
             }
             else
             {
