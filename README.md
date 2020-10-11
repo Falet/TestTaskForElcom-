@@ -10,3 +10,7 @@ Parser отвечает за разбор данных,подготовку к �
 
 Visualisation - визуализирует односвязный список по элементно.
 
+Результат:
+![alt text](https://github.com/Falet/TestTaskForElcom-/tree/main/TestTask/TestTask/Resources/РезультатПервойСсылки.png)
+
+![alt text](https://github.com/Falet/TestTaskForElcom-/tree/main/TestTask/TestTask/Resources/РезультатВторойСсылки.png)
