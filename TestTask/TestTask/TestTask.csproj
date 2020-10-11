@@ -86,7 +86,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\ElementWithAttributeLower.png" />
+    <None Include="Resources\ElementWithAttributeUpper.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Element.png" />
   </ItemGroup>

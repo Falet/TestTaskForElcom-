@@ -66,6 +66,7 @@ namespace TestTask
             else
                 ElementImage = Properties.Resources.Element;
             float width = Math.Max(ElementTreeChild.NameOfElement.ToString().Length * Gheight * 1 / 3.5f, widthA);
+            //g.DrawImage(Properties.Resources.ElementWithAttributeUpper, x, y, width, Gheight);
             PointF pos = new PointF(x + width / 15, y + Gheight / 4);
             g.DrawString(ElementTreeChild.NameOfElement.ToString(), new Font("Times New Roman", Gheight * 1 / 3), Brushes.Black, pos);
             g.DrawImage(ElementImage, x, y, width, Gheight);
