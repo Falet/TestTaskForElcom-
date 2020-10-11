@@ -6,6 +6,11 @@ namespace TestTask
 {
     class InputXML: Iinput
     {
+        /// <summary>
+        /// Скачивание и подготовка XML файла
+        /// </summary>
+        /// <param name="URLString">Срока URL</param>
+        /// <returns></returns>
         public XElement InputDataUsingURL(String URLString)
         {
             try
